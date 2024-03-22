@@ -1,0 +1,16 @@
+{
+  "name": "shop-react-redux-cloudfront-backend",
+  "version": "1.0.0",
+  "description": "NodeJS backend for an E-commerce shop application, implemented using AWS Cloud, Serverless architecture, and the Serverless framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariia-zaiets/shop-react-redux-cloudfront-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/mariia-zaiets/shop-react-redux-cloudfront-backend#readme"
+}
