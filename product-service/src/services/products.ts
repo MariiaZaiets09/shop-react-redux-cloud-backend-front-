@@ -1,16 +1,16 @@
 export interface ProductDetailsInterface {
-    id: string,
-    title: string,
-    description: string,
-    price: number,
+  id: string;
+  title: string;
+  description: string;
+  price: number;
 }
 
 export interface ProductDataInterface {
-    product: ProductDetailsInterface,
-    count: number,
+  product: ProductDetailsInterface;
+  count: number;
 }
 
 export interface ProductServiceAPIInterface {
-    getProductById: (id: string) => Promise<ProductDataInterface>,
-    getProductsList: () => Promise<ProductDataInterface[]>,
+  getProductById: (id: string) => Promise<ProductDataInterface>;
+  getProductsList: () => Promise<ProductDataInterface[]>;
 }
