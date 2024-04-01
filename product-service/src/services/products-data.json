@@ -1,0 +1,56 @@
+[
+  {
+    "product": {
+      "description": "Short Product Description1",
+      "id": "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
+      "price": 24,
+      "title": "Product A"
+    },
+    "count": 1
+  },
+  {
+    "product": {
+      "description": "Short Product Description2",
+      "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a1",
+      "price": 15,
+      "title": "Product B"
+    },
+    "count": 2
+  },
+  {
+    "product": {
+      "description": "Short Product Description3",
+      "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a3",
+      "price": 23,
+      "title": "Product C"
+    },
+    "count": 3
+  },
+  {
+    "product": {
+      "description": "Short Product Description4",
+      "id": "7567ec4b-b10c-48c5-9345-fc73348a80a1",
+      "price": 15,
+      "title": "Product D"
+    },
+    "count": 4
+  },
+  {
+    "product": {
+      "description": "Short Product Description5",
+      "id": "7567ec4b-b10c-48c5-9445-fc73c48a80a2",
+      "price": 23,
+      "title": "Product E"
+    },
+    "count": 5
+  },
+  {
+    "product": {
+      "description": "Short Product Description6",
+      "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+      "price": 15,
+      "title": "Product F"
+    },
+    "count": 6
+  }
+]

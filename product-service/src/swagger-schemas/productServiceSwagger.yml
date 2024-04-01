@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Product Service API
+  description: API for managing products
+  version: 1.0.0
+servers:
+  - url: https://igqfikc3n1.execute-api.us-east-1.amazonaws.com/dev
+paths:
+  /products/{productId}:
+    get:
+      summary: Get product information by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: ID of the product
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product:
+                    $ref: '#/components/schemas/Product'
+                  count:
+                    type: integer
+                    description: Number of products available
+        '404':
+          description: Product with the specified ID not found
+  /products:
+    get:
+      summary: Get list of all products
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductData'
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the product
+        title:
+          type: string
+          description: Title of the product
+        description:
+          type: string
+          description: Description of the product
+        price:
+          type: number
+          description: Price of the product
+      required:
+        - id
+        - title
+        - description
+        - price
+    ProductData:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+        count:
+          type: integer
+          description: Number of products available
+      required:
+        - product
+        - count
