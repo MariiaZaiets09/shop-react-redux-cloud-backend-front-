@@ -13,3 +13,4 @@ export const getProductsListHandler = () => async (event, _context) => {
     return errorResponse(err);
   }
 };
+//test
