@@ -9,6 +9,8 @@ provider:
   region: us-east-1
   environment:
     ENV_STAGE: ${opt:stage, 'dev'}
+    PRODUCTS_TABLE: ${self:resources.Resources.ProductsTable.Properties.TableName}
+    STOCKS_TABLE: ${self:resources.Resources.StocksTable.Properties.TableName}
 
 plugins:
   - serverless-webpack
@@ -17,6 +19,36 @@ custom:
   webpack:
     webpackConfig: 'webpack.config.js'
     includeModules: true
+
+resources:
+  Resources:
+    ProductsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: products
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    StocksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: stocks
+        AttributeDefinitions:
+          - AttributeName: product_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: product_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
 
 functions:
   getProductsList:
@@ -38,3 +70,10 @@ functions:
             parameters:
               paths:
                 productId: true
+  createProduct:
+    handler: handler.createProduct
+    events:
+      - http:
+          path: products
+          method: post
+          cors: true

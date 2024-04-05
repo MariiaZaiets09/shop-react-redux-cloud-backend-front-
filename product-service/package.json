@@ -8,8 +8,9 @@
     "lint-fix": "eslint --fix .",
     "format": "prettier --write .",
     "package-build": "sls package",
-    "deploy:dev": "sls deploy --stage dev",
-    "deploy:prod": "sls deploy --stage prod",
+    "deploy:populate-tables": "ts-node src/services/dynamoDB-memory-product-service.ts",
+    "deploy:dev": "sls deploy --stage dev && npm run deploy:populate-tables",
+    "deploy:prod": "sls deploy --stage prod && npm run deploy:populate-tables",
     "remove:dev-stack": "sls remove --stage dev --region us-east-1",
     "remove:prod-stack": "sls remove --stage prod --region us-east-1"
   },
@@ -35,6 +36,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.1592.0",
+    "pg": "^8.11.5",
     "winston": "^3.3.3"
   },
   "jest": {
