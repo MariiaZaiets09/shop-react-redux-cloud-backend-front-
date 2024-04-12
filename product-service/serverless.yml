@@ -9,6 +9,7 @@ provider:
   region: us-east-1
   environment:
     ENV_STAGE: ${opt:stage, 'dev'}
+    CONNECTION_STR: ''
 
 plugins:
   - serverless-webpack
@@ -26,7 +27,6 @@ functions:
           path: products
           method: get
           cors: true
-
   getProductById:
     handler: handler.getProductById
     events:
@@ -38,3 +38,10 @@ functions:
             parameters:
               paths:
                 productId: true
+  createProduct:
+    handler: handler.createProduct
+    events:
+      - http:
+          path: products
+          method: post
+          cors: true

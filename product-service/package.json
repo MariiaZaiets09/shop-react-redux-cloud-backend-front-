@@ -8,6 +8,7 @@
     "lint-fix": "eslint --fix .",
     "format": "prettier --write .",
     "package-build": "sls package",
+    "deploy:populate-tables": "ts-node src/services/postgres-memory-product-service.ts",
     "deploy:dev": "sls deploy --stage dev",
     "deploy:prod": "sls deploy --stage prod",
     "remove:dev-stack": "sls remove --stage dev --region us-east-1",
@@ -17,7 +18,9 @@
     "@types/aws-lambda": "^8.10.73",
     "@types/jest": "^29.5.12",
     "@types/node": "^10.17.56",
+    "@types/pg": "^8.11.4",
     "@types/serverless": "^1.78.23",
+    "@types/uuid": "^9.0.8",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-es6": "^1.0.0",
@@ -35,6 +38,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.1592.0",
+    "pg": "^8.11.5",
     "winston": "^3.3.3"
   },
   "jest": {
