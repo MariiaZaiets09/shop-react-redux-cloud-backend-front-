@@ -38,18 +38,16 @@ export const importFileParserHandler = () => async (event) => {
       .pipe(csvParser())
       .on('data', (data) => records.push(data))
       .on('end', async () => {
-        // Log each record to CloudWatch
-        winstonLogger.logRequest(`Parsed records: ${records}`);
+        // Serialize and log the records as a JSON string
+        winstonLogger.logRequest(`Parsed records: ${JSON.stringify(records, null, 2)}`);
 
-        // Move the file to the 'parsed' folder
+        // Continue with moving the file to the 'parsed' folder
         const newObjectKey = objectKey.replace('uploaded/', 'parsed/');
-        await s3
-          .copyObject({
-            Bucket: bucketName,
-            CopySource: `${bucketName}/${objectKey}`,
-            Key: newObjectKey,
-          })
-          .promise();
+        await s3.copyObject({
+          Bucket: bucketName,
+          CopySource: `${bucketName}/${objectKey}`,
+          Key: newObjectKey,
+        }).promise();
         await s3.deleteObject({ Bucket: bucketName, Key: objectKey }).promise();
         winstonLogger.logRequest(`File ${objectKey} moved to 'parsed' folder.`);
       });
