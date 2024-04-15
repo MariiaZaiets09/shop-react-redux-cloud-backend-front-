@@ -27,6 +27,13 @@ functions:
           path: products
           method: get
           cors: true
+    vpc:
+      securityGroupIds:
+        - sg-0d3aaf5f0dc6ceba9
+      subnetIds:
+        - subnet-0b3f5462358873117
+        - subnet-0dade5e03fa7f3ee8
+        - subnet-02f8d70e6ce1c02e6
   getProductById:
     handler: handler.getProductById
     events:
@@ -38,6 +45,13 @@ functions:
             parameters:
               paths:
                 productId: true
+    vpc:
+      securityGroupIds:
+        - sg-0d3aaf5f0dc6ceba9
+      subnetIds:
+        - subnet-0b3f5462358873117
+        - subnet-0dade5e03fa7f3ee8
+        - subnet-02f8d70e6ce1c02e6
   createProduct:
     handler: handler.createProduct
     events:
@@ -45,3 +59,10 @@ functions:
           path: products
           method: post
           cors: true
+    vpc:
+      securityGroupIds:
+        - sg-0d3aaf5f0dc6ceba9
+      subnetIds:
+        - subnet-0b3f5462358873117
+        - subnet-0dade5e03fa7f3ee8
+        - subnet-02f8d70e6ce1c02e6
