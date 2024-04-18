@@ -3,7 +3,6 @@ import AWS, { SSM } from 'aws-sdk';
 import productsData from './products-data.json';
 import { winstonLogger } from '../utils/winstonLogger';
 
-
 AWS.config.update({ region: 'us-east-1' });
 
 const ssm = new SSM();
@@ -13,10 +12,14 @@ const parameterName = '/db/postgres/test';
 
 const getClient = async () => {
   try {
-    const parameterValue = await ssm.getParameter({ Name: parameterName, WithDecryption: true }).promise();
+    const parameterValue = await ssm
+      .getParameter({ Name: parameterName, WithDecryption: true })
+      .promise();
     const connectionString = parameterValue.Parameter.Value;
 
-    winstonLogger.logRequest('Retrieved PostgreSQL connection string from Parameter Store.');
+    winstonLogger.logRequest(
+      'Retrieved PostgreSQL connection string from Parameter Store.',
+    );
     return new Client({ connectionString });
   } catch (error) {
     winstonLogger.logError('Error getting parameter value: ' + error.message);
@@ -63,15 +66,26 @@ const populateTables = async (client) => {
     winstonLogger.logRequest('Populating PostgreSQL tables...');
 
     for (const product of productsData) {
-      await client.query(`
+      await client.query(
+        `
         INSERT INTO products (id, title, description, price)
         VALUES ($1, $2, $3, $4);
-      `, [product.product.id, product.product.title, product.product.description, product.product.price]);
+      `,
+        [
+          product.product.id,
+          product.product.title,
+          product.product.description,
+          product.product.price,
+        ],
+      );
 
-      await client.query(`
+      await client.query(
+        `
         INSERT INTO stocks (product_id, count)
         VALUES ($1, $2);
-      `, [product.product.id, product.count]);
+      `,
+        [product.product.id, product.count],
+      );
     }
 
     winstonLogger.logRequest('PostgreSQL tables populated successfully!');
@@ -86,7 +100,9 @@ const populateTables = async (client) => {
 
   try {
     await createTables(client);
-    winstonLogger.logRequest('Tables creation and population completed successfully.');
+    winstonLogger.logRequest(
+      'Tables creation and population completed successfully.',
+    );
   } catch (error) {
     console.error('An error occurred:', error);
     process.exit(1);
