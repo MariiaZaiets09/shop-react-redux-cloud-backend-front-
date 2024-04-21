@@ -1,7 +1,7 @@
 {
-  "name": "product-service",
+  "name": "import-service",
   "version": "1.0.0",
-  "description": "The Product Service creates the API Gateway and Lambda functions",
+  "description": "The Import Service manages file import functionality",
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
@@ -17,7 +17,6 @@
     "@types/aws-lambda": "^8.10.73",
     "@types/jest": "^29.5.12",
     "@types/node": "^10.17.56",
-    "@types/pg": "^8.11.4",
     "@types/serverless": "^1.78.23",
     "@types/uuid": "^9.0.8",
     "aws-sdk-mock": "^5.9.0",

@@ -15,7 +15,12 @@ export const createProductHandler = () => async (event, _context) => {
   }
 
   // Validate product data (excluding ID validation for creation)
-  if (!productData.title || !productData.description || typeof productData.price !== 'number' || typeof productData.count !== 'number') {
+  if (
+    !productData.title ||
+    !productData.description ||
+    typeof productData.price !== 'number' ||
+    typeof productData.count !== 'number'
+  ) {
     return successResponse({ message: 'Invalid product data' }, 400);
   }
 
@@ -35,7 +40,12 @@ export const createProductHandler = () => async (event, _context) => {
             ON CONFLICT (id) DO UPDATE
             SET title = $2, description = $3, price = $4
             RETURNING id;`;
-    await client.query(productUpsertQuery, [id, productData.title, productData.description, productData.price]);
+    await client.query(productUpsertQuery, [
+      id,
+      productData.title,
+      productData.description,
+      productData.price,
+    ]);
 
     // Upsert Stock Data (Assuming 'product_id' is a unique constraint in 'stocks' table)
     const stockUpsertQuery = `
@@ -48,7 +58,10 @@ export const createProductHandler = () => async (event, _context) => {
     await client.query('COMMIT');
 
     winstonLogger.logRequest('Product and stock data processed successfully.');
-    return successResponse({ message: 'Product processed successfully', id }, 201);
+    return successResponse(
+      { message: 'Product processed successfully', id },
+      201,
+    );
   } catch (err) {
     await client.query('ROLLBACK');
     winstonLogger.logError(`Error processing product: ${err.message}`);
