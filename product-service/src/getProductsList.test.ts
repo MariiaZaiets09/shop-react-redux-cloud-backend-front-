@@ -23,4 +23,3 @@ describe('getProductsList', () => {
     });
   });
 });
-//test

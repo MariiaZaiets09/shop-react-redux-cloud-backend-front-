@@ -1,0 +1,38 @@
+service: authorization-service
+frameworkVersion: '3'
+variablesResolutionMode: 20210219
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    ENV_STAGE: ${opt:stage, 'dev'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - execute-api:Invoke
+      Resource: '*'
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+
+functions:
+  basicAuthorizer:
+    handler: handler.basicAuthorizer
+    events:
+      - httpApi:
+          path: /basicAuthorizer
+          method: post
+          cors: true
+      - http:
+          path: /basicAuthorizer
+          method: post
+          cors: true

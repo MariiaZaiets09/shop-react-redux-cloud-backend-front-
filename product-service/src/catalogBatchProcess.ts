@@ -8,7 +8,7 @@ export const catalogBatchProcessHandler = () => async (event, _context) => {
 
   console.log('Event:', event);
 
-  const connectionString = '';
+  const connectionString = process.env.CONNECTION_STR;
   console.log('Connection String:', connectionString);
   const client = new Client({
     connectionString,
