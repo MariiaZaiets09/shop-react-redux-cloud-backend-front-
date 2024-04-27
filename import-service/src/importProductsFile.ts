@@ -33,5 +33,3 @@ export const importProductsFileHandler = () => async (event) => {
     return errorResponse(error, 500);
   }
 };
-
-//test
